@@ -98,12 +98,15 @@ return [
             'search_path' => 'public',
             'sslmode' => (function () {
                 $sslmode = env('DB_SSLMODE');
+                if ($sslmode) {
+                    return $sslmode;
+                }
                 $host = env('DB_HOST', '');
                 if (str_contains($host, 'neon.tech')) {
-                    $endpoint = str_replace('-pooler', '', explode('.', $host)[0]);
+                    $endpoint = explode('.', $host)[0];
                     return "require;options='endpoint={$endpoint}'";
                 }
-                return $sslmode ?: 'prefer';
+                return 'prefer';
             })(),
         ],
 

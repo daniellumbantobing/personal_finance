@@ -36,6 +36,7 @@
     "VIEW_COMPILED_PATH": "/tmp/views",
     "CACHE_STORE": "database",
     "SESSION_DRIVER": "database",
+    "DB_SSLMODE": "require",
     "LOG_CHANNEL": "stderr"
   }
 }
