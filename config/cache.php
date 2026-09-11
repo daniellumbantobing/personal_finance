@@ -15,7 +15,14 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    'default' => (function () {
+        $store = env('CACHE_STORE', 'array');
+        // Prevent PgBouncer transaction abort errors on serverless
+        if ($store === 'database' || ! $store) {
+            return 'array';
+        }
+        return $store;
+    })(),
 
     /*
     |--------------------------------------------------------------------------
