@@ -62,20 +62,20 @@ new #[Layout('layouts.guest')] class extends Component
             <button type="submit"
                     wire:loading.attr="disabled"
                     wire:target="login"
-                    class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 disabled:cursor-not-allowed text-white font-bold text-sm transition-all shadow-md active:scale-95">
+                    class="relative w-full h-12 flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg active:scale-[0.99] disabled:opacity-85 disabled:cursor-wait">
                 <!-- Normal State -->
                 <span wire:loading.remove wire:target="login" class="inline-flex items-center gap-2">
-                    <span>{{ __('Secure Log in') }}</span>
-                    <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+                    <span>{{ __('Masuk ke Akun') }}</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </span>
 
                 <!-- Loading State (Berputar) -->
-                <span wire:loading wire:target="login" class="inline-flex items-center gap-2">
+                <span wire:loading wire:target="login" class="inline-flex items-center gap-2.5">
                     <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span>{{ __('Sedang Masuk...') }}</span>
+                    <span class="font-medium text-slate-100">{{ __('Memverifikasi...') }}</span>
                 </span>
             </button>
         </div>
