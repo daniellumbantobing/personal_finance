@@ -23,4 +23,13 @@ if ($storagePath = env('APP_STORAGE', env('LARAVEL_STORAGE_PATH'))) {
     $app->useStoragePath($storagePath);
 }
 
+// Force array cache store to prevent PostgreSQL PgBouncer transaction aborts on serverless
+$app->booting(function () {
+    config([
+        'cache.default' => 'array',
+        'cache.limiter' => 'array',
+        'cache.stores.database.driver' => 'array',
+    ]);
+});
+
 return $app;

@@ -33,14 +33,20 @@ foreach ($ephemeralDirs as $dir) {
 putenv('APP_STORAGE=/tmp/storage');
 putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
 putenv('VIEW_COMPILED_PATH=/tmp/views');
+putenv('CACHE_STORE=array');
+putenv('CACHE_DRIVER=array');
 
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/views';
+$_ENV['CACHE_STORE'] = 'array';
+$_ENV['CACHE_DRIVER'] = 'array';
 
 $_SERVER['APP_STORAGE'] = '/tmp/storage';
 $_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 $_SERVER['VIEW_COMPILED_PATH'] = '/tmp/views';
+$_SERVER['CACHE_STORE'] = 'array';
+$_SERVER['CACHE_DRIVER'] = 'array';
 
 // 3. Delegate request execution to Laravel's public entrypoint
 require __DIR__ . '/../public/index.php';

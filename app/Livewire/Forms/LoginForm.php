@@ -31,14 +31,22 @@ class LoginForm extends Form
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
-            RateLimiter::hit($this->throttleKey());
+            try {
+                RateLimiter::hit($this->throttleKey());
+            } catch (\Throwable $e) {
+                report($e);
+            }
 
             throw ValidationException::withMessages([
                 'form.email' => trans('auth.failed'),
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey());
+        try {
+            RateLimiter::clear($this->throttleKey());
+        } catch (\Throwable $e) {
+            report($e);
+        }
     }
 
     /**
@@ -46,7 +54,12 @@ class LoginForm extends Form
      */
     protected function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        try {
+            if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+                return;
+            }
+        } catch (\Throwable $e) {
+            report($e);
             return;
         }
 

@@ -15,14 +15,9 @@ return [
     |
     */
 
-    'default' => (function () {
-        $store = env('CACHE_STORE', 'array');
-        // Prevent PgBouncer transaction abort errors on serverless
-        if ($store === 'database' || ! $store) {
-            return 'array';
-        }
-        return $store;
-    })(),
+    'default' => 'array',
+
+    'limiter' => 'array',
 
     /*
     |--------------------------------------------------------------------------
@@ -47,11 +42,8 @@ return [
         ],
 
         'database' => [
-            'driver' => 'database',
-            'connection' => env('DB_CACHE_CONNECTION'),
-            'table' => env('DB_CACHE_TABLE', 'cache'),
-            'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
-            'lock_table' => env('DB_CACHE_LOCK_TABLE'),
+            'driver' => 'array',
+            'serialize' => false,
         ],
 
         'file' => [
