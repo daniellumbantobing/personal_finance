@@ -59,9 +59,24 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="pt-2">
-            <button class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-all shadow-md active:scale-95">
-                {{ __('Secure Log in') }}
-                <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+            <button type="submit"
+                    wire:loading.attr="disabled"
+                    wire:target="login"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 disabled:cursor-not-allowed text-white font-bold text-sm transition-all shadow-md active:scale-95">
+                <!-- Normal State -->
+                <span wire:loading.remove wire:target="login" class="inline-flex items-center gap-2">
+                    <span>{{ __('Secure Log in') }}</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+                </span>
+
+                <!-- Loading State (Berputar) -->
+                <span wire:loading wire:target="login" class="inline-flex items-center gap-2">
+                    <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                    </svg>
+                    <span>{{ __('Sedang Masuk...') }}</span>
+                </span>
             </button>
         </div>
         
